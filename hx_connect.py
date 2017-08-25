@@ -8,8 +8,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 # Suppress the  InsecureRequestWarning: Unverified HTTPS request
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-# FUTURE - get user info from BASH Script
-# ---- sort user info from bash script section  -------
+
 # Get user provided information from bash script and parse it
 hx_ip = os.environ['HX_IP']
 hx_username = os.environ['HX_USERNAME']
@@ -82,8 +81,6 @@ def get_clusterinv(base_url, access_token):
         'authorization': auth,
         'cache-control': "no-cache"}
 
-    # FUTURE - Possibly VERIFY Token here again to be safe??
-
     inv = requests.request("GET", url, headers=headers, verify=False)
     inventory = json.loads(inv.text)
     return inventory
@@ -98,7 +95,6 @@ def get_vms(base_url, access_token):
         'cache-control': "no-cache"}
 
     querystring = {"entityType": "VIRTCLUSTER"}
-    # FUTURE - Possibly VERIFY Token here again to be safe??
     inv = requests.request("GET", url, headers=headers,
                            params=querystring, verify=False)
     vms = json.loads(inv.text)
